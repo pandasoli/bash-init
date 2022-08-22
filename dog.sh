@@ -100,5 +100,8 @@ drawing() {
   done
 
   echo ""
+
+  PS1='\[\033[1;33m\]\w '
+  PS1="$PS1\[\033[0m\]\$ "
 }
 drawing
