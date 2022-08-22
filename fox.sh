@@ -1,7 +1,9 @@
 # Drawing
 drawing() {
-  os=$(cat /etc/*-release | grep "DISTRIB_ID=" | sed 's/DISTRIB_ID=//g' | sed 's/["]//g' | awk "{print $1}")
-  os="$os $(cat /etc/*-release | grep "VERSION=" | sed 's/VERSION=//g' | sed 's/["]//g' | awk "{print $1 $2 $3 $4}")"
+  sleep 0.1
+
+  os=$(cat /etc/*-release | grep "DISTRIB_ID=" | sed 's/DISTRIB_ID=//g' | sed 's/["]//g' | awk '{print $1}')
+  os="$os $(cat /etc/*-release | grep "VERSION=" | sed 's/VERSION=//g' | sed 's/["]//g' | awk '{print $1 $2 $3 $4}')"
 
   vkernel=$(uname -r)
   desktop_environment=$XDG_CURRENT_DESKTOP
@@ -104,4 +106,4 @@ drawing() {
   PS1='\[\033[1;31m\]\w '
   PS1="$PS1\[\033[0m\]\$ "
 }
-drawing
+drawing $1
