@@ -10,7 +10,7 @@ and put this code inside the `~/.profile` file.
 <div align='left'>
 
 ```sh
-./<the drawing you choosed>.sh
+./<the drawing you choosed>.sh $0
 ```
 </div>
 
