@@ -2,8 +2,8 @@
 drawing() {
   sleep 0.1
 
-  os=$(cat /etc/*-release | grep "DISTRIB_ID=" | sed 's/DISTRIB_ID=//g' | sed 's/["]//g' | awk '{print $1}')
-  os="$os $(cat /etc/*-release | grep "VERSION=" | sed 's/VERSION=//g' | sed 's/["]//g' | awk '{print $1 $2 $3 $4}')"
+  os=$(cat /etc/*-release | grep "DISTRIB_ID=" | sed 's/DISTRIB_ID=//g' | sed 's/["]//g' | awk '{print $0}')
+  os="$os $(cat /etc/*-release | grep "VERSION=" | sed 's/VERSION=//g' | sed 's/["]//g' | awk '{print $0}')"
 
   vkernel=$(uname -r)
   desktop_environment=$XDG_CURRENT_DESKTOP
@@ -19,19 +19,19 @@ drawing() {
   free_disk=$(df -h --output=source,size,avail | grep "/dev/sda3" | awk '{print $3}')
 
   animal=(
-    '#######             #######'
-    '  ######$$$$$$$$$$$######  '
-    '  ##$#$$$$$$$$$$$$$$$#$##  '
-    '  #$$$$$$$$$$$$$$$$$$$$$#  '
-    ' $$$$$$$$$$$$$$$$$$$$$$$$$ '
-    ' $$$$$$$$$$$$$$$$$$$$$$$$$ '
-    ' $$$$$$####@#$#@####$$$$$$ '
-    ' $$$$$$$$$##$$$##$$$$$$$$$ '
-    '  WWW$$$$$$$$$$$$$$$$$WWW  '
-    '   WWWW$$$$$$$$$$$$$WWWW   '
-    '     WWWW$$$###$$$WWWW     '
-    '       WWWWWW#WWWWWW       '
-    '         WWWWWWWWW         '
+    '               █  ▄        '
+    '             ▄██████▄      '
+    '             █████@████▄   '
+    '             ██$###,,,█▀   '
+    '          ▄██████###       '
+    '         ▄████████#"       '
+    '       ▄█████████$"        '
+    '       █████████▀█         '
+    '       █████████ █         '
+    '       ██████  █ █   ▄     '
+    '       ███████▄█▄█▄▄███    '
+    '        ▀█████████████▀    '
+    '           ▀▀▀▀▀▀▀▀▀       '
   )
 
   printxy() {
@@ -49,24 +49,22 @@ drawing() {
 
     if [ "$method" == "r" ]; then
       str=${str//"!"/""}
-      str=${str//"#"/""}
-      str=${str//"@"/" "}
       str=${str//">"/" "}
-      str=${str//"%"/" "}
-      str=${str//"&"/""}
       str=${str//"+"/""}
-      str=${str//"W"/" "}
-      str=${str//"$"/" "}
     elif [ "$method" == "a" ]; then
       str=${str//" "/"\033[0m "}
       str=${str//"!"/"\033[1;37m"}
-      str=${str//"#"/"\033[40m "}
-      str=${str//"@"/"\033[46m "}
+      str=${str//"█"/"\033[31m█"}
+      str=${str//"#"/"\033[37m█"}
+      str=${str//"▄"/"\033[0m\033[31m▄"}
+      str=${str//"▀"/"\033[0m\033[31m▀"}
+      str=${str//"$"/"\033[47m\033[31m▄"}
+      str=${str//"\""/"\033[0m\033[37m▀"}
+      str=${str//","/"\033[41m\033[37m▄"}
+      str=${str//"@"/"\033[41m\033[30m▄"}
       str=${str//">"/"\033[1;31m"}
       str=${str//"&"/"\033[31m"}
       str=${str//"+"/"\033[31m"}
-      str=${str//"W"/"\033[1;47m "}
-      str=${str//"$"/"\033[1;41m "}
       str="$str\033[0m"
     fi
 
