@@ -2,8 +2,8 @@
 drawing() {
   sleep 0.1
 
-  os=$(cat /etc/*-release | grep "DISTRIB_ID=" | sed 's/DISTRIB_ID=//g' | sed 's/["]//g' | awk '{print $1}')
-  os="$os $(cat /etc/*-release | grep "VERSION=" | sed 's/VERSION=//g' | sed 's/["]//g' | awk '{print $1 $2 $3 $4}')"
+  os=$(cat /etc/*-release | grep "DISTRIB_ID=" | sed 's/DISTRIB_ID=//g' | sed 's/["]//g' | awk '{print $0}')
+  os="$os "$(cat /etc/*-release | grep "VERSION=" | sed 's/VERSION=//g' | sed 's/["]//g' | awk '{print $0}')
 
   vkernel=$(uname -r)
   desktop_environment=$XDG_CURRENT_DESKTOP
@@ -18,7 +18,7 @@ drawing() {
   total_disk=$(df -h --output=source,size,avail | grep "/dev/sda3" | awk '{print $2}')
   free_disk=$(df -h --output=source,size,avail | grep "/dev/sda3" | awk '{print $3}')
 
-  animal=(
+  drawing=(
     '                         '
     '    ▄▄▀▀▀#▄▄             '
     '   █      "$#▄           '
@@ -95,8 +95,8 @@ drawing() {
   draw_center ">RAM: &$free_ram_mb &MB / $total_ram_mb MB" 9
   draw_center ">Disk: &$free_disk / $total_disk" 10
 
-  for (( i=0; i < ${#animal[@]}; ++i )); do
-    line=${animal[$i]}
+  for (( i=0; i < ${#drawing[@]}; ++i )); do
+    line=${drawing[$i]}
     line=$(replace_colors a "$line")
     printxy 4 $i "$line"
   done
