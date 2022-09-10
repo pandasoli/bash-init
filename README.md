@@ -5,7 +5,7 @@
 
 ## Instalation
 Just past the drawing you liked best in `~/`,  
-and put this code inside the `~/.profile` file.
+and put this code inside the `~/.bashrc` file.
 
 <div align='left'>
 
